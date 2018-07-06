@@ -32,6 +32,8 @@ if [ $# -gt 0 ]; then
 
     elif [ "$1" == "lint" ]; then
       $COMPOSE run --rm web yarn lint
+    elif [ "$1" == "shell" ]; then
+      $COMPOSE run --rm web /bin/sh
     else
       $COMPOSE run --rm web "$@"
     fi
@@ -43,14 +45,14 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "test" ]; then
       shift 1
       $COMPOSE run --rm api vendor/bin/phpunit
+    elif [ "$1" == "shell" ]; then
+      $COMPOSE run --rm api /bin/sh
     else
       $COMPOSE run --rm api "$@"
     fi
   elif [ "$1" == "e2e" ]; then
     shift 1
-    if [ "$1" == "yarn" ]; then
-      $COMPOSE run --rm e2e "$@"
-    elif [ "$1" == "test" ]; then
+    if [ "$1" == "test" ]; then
       shift 1
       $COMPOSE up -d
       $COMPOSE run --rm e2e yarn test "$@"
@@ -60,8 +62,10 @@ if [ $# -gt 0 ]; then
       $COMPOSE up -d
       $COMPOSE run --rm e2e yarn test:debug "$@"
       $COMPOSE down
+    elif [ "$1" == "shell" ]; then
+      $COMPOSE run --rm e2e /bin/sh
     else
-      $COMPOSE "$@"
+      $COMPOSE run --rm e2e "$@"
     fi
   else
     $COMPOSE "$@"
