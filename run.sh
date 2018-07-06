@@ -45,6 +45,14 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "test" ]; then
       shift 1
       $COMPOSE run --rm api vendor/bin/phpunit
+    elif [ "$1" == "setup" ]; then
+      ./run.sh api configure
+      ./run.sh api migrate
+      ./run.sh api seed
+    elif [ "$1" == "configure" ]; then
+      cp ./api/.env.example ./api/.env
+      ./run.sh api art key:generate
+      ./run.sh api art jwt:secret
     elif [ "$1" == "migrate" ]; then
       $COMPOSE run --rm api php artisan migrate --seed
     elif [ "$1" == "seed" ]; then

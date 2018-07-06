@@ -1,7 +1,7 @@
 ## Commands
 
 #### Setup
-- `./run.sh api migrate && ./run.sh api seed`
+- `./run.sh api setup`
 - `./run.sh up -d`
 - Access on localhost:80
 
