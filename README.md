@@ -1,4 +1,8 @@
 ## Commands
+
+#### Setup
+- `./run api migrate && ./run api seed`
+
 #### Development
 ##### All
 - `./run`: See existing containers

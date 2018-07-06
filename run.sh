@@ -45,6 +45,10 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "test" ]; then
       shift 1
       $COMPOSE run --rm api vendor/bin/phpunit
+    elif [ "$1" == "migrate" ]; then
+      $COMPOSE run --rm api php artisan migrate --seed
+    elif [ "$1" == "seed" ]; then
+      $COMPOSE run --rm api php artisan db:seed --class=ThreadSeeder
     elif [ "$1" == "shell" ]; then
       $COMPOSE run --rm api /bin/sh
     else
