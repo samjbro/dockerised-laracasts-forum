@@ -2,6 +2,7 @@
 
 #### Setup
 - `./run api migrate && ./run api seed`
+- Access on localhost:80
 
 #### Development
 ##### All
