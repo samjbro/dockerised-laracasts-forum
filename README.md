@@ -1,8 +1,9 @@
 ## Commands
 
 #### Setup
-- `./run.sh api setup`
 - `./run.sh up -d`
+- Wait ten seconds or so for the mysql container to spin up
+- `./run.sh api setup`
 - Access on localhost:80
 
 #### Development
