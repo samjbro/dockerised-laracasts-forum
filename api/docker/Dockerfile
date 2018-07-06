@@ -22,6 +22,8 @@ COPY composer.lock /usr/src/api
 
 RUN composer update --no-scripts --no-autoloader
 
+COPY .env.example .env
+
 COPY . /usr/src/api
 
 RUN composer dump-autoload --optimize

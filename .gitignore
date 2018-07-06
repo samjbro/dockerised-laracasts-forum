@@ -15,3 +15,5 @@
 e2e/node_modules
 
 web/node_modules
+
+/.idea
