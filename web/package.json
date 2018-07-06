@@ -1,0 +1,68 @@
+{
+  "name": "laravel-forum-web-interface",
+  "version": "0.0.1",
+  "scripts": {
+    "lint": "eslint --ext .js,.vue . --fix",
+    "test": "yarn lint && cross-env NODE_ENV=test nyc mocha-webpack --webpack-config build/webpack.config.dev.js --require tests/setup.js 'tests/**/*.spec.js' --watch",
+    "test:coverage": "yarn lint && cross-env NODE_ENV=test nyc mocha-webpack --webpack-config build/webpack.config.dev.js --require tests/setup.js 'tests/**/*.spec.js'",
+    "start": "webpack-dev-server --hot --inline --config build/webpack.config.dev.js --port 3000 --host=0.0.0.0"
+  },
+  "dependencies": {
+    "alertify.js": "^1.0.12",
+    "axios": "^0.18.0",
+    "local-storage": "^1.4.2",
+    "lodash": "^4.17.10",
+    "nprogress": "^0.2.0",
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1",
+    "vue-virtual-scroller": "^0.12.0"
+  },
+  "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.16",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-jest": "^23.0.1",
+    "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "chai": "^4.1.2",
+    "copy-webpack-plugin": "^4.5.1",
+    "cross-env": "^5.1.6",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "eslint-plugin-vue": "^4.5.0",
+    "expect": "^23.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "jsdom": "^11.11.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^5.2.0",
+    "mocha-webpack": "next",
+    "node-sass": "^4.9.0",
+    "nyc": "^12.0.2",
+    "sass-loader": "^7.0.2",
+    "sinon": "^5.0.10",
+    "vue-jest": "^2.6.0",
+    "vue-loader": "^15.2.4",
+    "vue-style-loader": "^4.1.0",
+    "vue-template-compiler": "^2.5.16",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^3.0.1",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.(js|vue)"
+    ],
+    "instrument": false,
+    "sourceMap": false
+  }
+}

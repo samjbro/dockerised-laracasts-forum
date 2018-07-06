@@ -1,0 +1,13 @@
+{
+  "globals": {
+    "mount": true,
+    "shallowMount": true,
+    "expect": true,
+    "sinon": true,
+    "Vue": true,
+    "_": true
+  },
+  "rules": {
+    "no-unused-expressions": "off"
+  }
+}

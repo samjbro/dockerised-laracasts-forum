@@ -1,0 +1,39 @@
+{
+  "output": "./output",
+  "helpers": {
+    "Nightmare": {
+      "url": "http://server:80",
+      "show": true,
+      "restart": false
+    },
+    "REST": {
+      "endpoint": "http://server:80/api/api"
+    },
+    "ApiDataFactory": {
+      "endpoint": "http://server:80/api/api",
+      "cleanup": true,
+      "factories": {
+        "thread": {
+          "factory": "/usr/src/e2e/tests/factories/thread.js",
+          "uri": "/threads"
+        },
+        "reply": {
+          "factory": "/usr/src/e2e/tests/factories/reply.js",
+          "uri": "/threads/$thread_id$/replies"
+        }
+      }
+    },
+    "LaracastsForum": {
+      "require": "./tests/helpers/laracasts_forum.js"
+    }
+  },
+  "include": {},
+  "mocha": {},
+  "bootstrap": false,
+  "teardown": null,
+  "hooks": [],
+  "gherkin": {},
+  "tests": "./tests/*_test.js",
+  "timeout": 10000,
+  "name": "e2e"
+}

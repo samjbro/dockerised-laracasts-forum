@@ -1,0 +1,64 @@
+version: '3'
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: docker/Dockerfile.dev
+    image: cs-server
+    ports:
+      - '${SERVER_PORT}:80'
+    networks:
+      - laracasts-forum
+    depends_on:
+      - web
+  web:
+    build:
+      context: ./web
+      dockerfile: docker/Dockerfile
+    image: laracasts-forum-web
+    ports:
+      - '${WEB_PORT}:3000'
+    environment:
+      PUBLIC_PORT: "${WEB_PORT}"
+    networks:
+      - laracasts-forum
+    volumes:
+      - ./web:/usr/src/web
+      - web_node_modules:/usr/src/web/node_modules
+  api:
+    build:
+      context: ./api
+      dockerfile: docker/Dockerfile
+    image: laracasts-forum-api
+    ports:
+      - '${API_PORT}:8080'
+    environment:
+      DB_HOST: "${DB_HOST}"
+      DB_DATABASE: "${DB_NAME}"
+      DB_USERNAME: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASS}"
+    networks:
+      - laracasts-forum
+    volumes:
+      - ./api:/usr/src/api
+      - api_vendor_files:/usr/src/api/vendor
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASS}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_PASS}"
+    ports:
+      - '${DB_PORT}:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - laracasts-forum
+networks:
+  laracasts-forum:
+    driver: bridge
+volumes:
+  web_node_modules:
+  api_vendor_files:
+  mysql_data:
