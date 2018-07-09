@@ -77,7 +77,7 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "shell" ]; then
       $COMPOSE run --rm e2e /bin/sh
     else
-      $COMPOSE run --rm e2e "$@"
+      $COMPOSE "$@"
     fi
   else
     $COMPOSE "$@"

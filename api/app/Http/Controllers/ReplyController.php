@@ -11,9 +11,7 @@ class ReplyController extends Controller
 {
     public function store (Request $request, Thread $thread)
     {
-        $reply = $thread->replies()->create([]);
-
-        $reply = $thread->replies()->create([
+        $reply = $thread->addReply([
             'user_id' => auth()->id(),
             'body' => $request->body
         ]);

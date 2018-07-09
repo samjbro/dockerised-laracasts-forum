@@ -1,10 +1,10 @@
 <template>
   <article class="thread-item">
     <h4 class="thread-item__attribute thread-item__attribute--title">
-      <div>{{ thread.creator.name }} said:</div>
+      <div>{{ thread.creator.name }} posted:</div>
       <a
-        href=""
-        @click.prevent="showThread">
+        @click.prevent="showThread"
+      >
         {{ thread.title }}
       </a>
     </h4>
