@@ -36,7 +36,6 @@ class ThreadController extends Controller
      */
     public function store(Request $request)
     {
-        throw new Exception('Hello World');
         $thread = $request->user()->threads()->create([
             'title' => request('title'),
             'body' => request('body')

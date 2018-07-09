@@ -1,13 +1,15 @@
 const requireg = require('requireg');
 const unirest = requireg('unirest');
+const expect = require('expect')
 
 class LaracastsForum extends Helper {
+
 
   _before() {
     const recorder = require('codeceptjs').recorder
     recorder.retry({
-      retries: 30,
-      minTimeout: 2000,
+      retries: 40,
+      minTimeout: 3000,
       when: err => {
         return err.message.indexOf('Docker not ready') > -1
       }
@@ -34,13 +36,20 @@ class LaracastsForum extends Helper {
 
   signIn () {
     let rest = this.helpers['REST']
-    return rest.sendPostRequest('/login', {
+    return rest.sendPostRequest('/me', {
       email: 'test@comms-express.com',
       password: 'secret'
     }).then(response => {
       rest.haveRequestHeaders({ Authorization: `Bearer ${response.body.access_token}` })
     })
-
+  }
+  signOut () {
+    let rest = this.helpers['REST']
+    return rest.sendDeleteRequest('/me').then(response => {
+      // console.log(response)
+      // console.log(response.error)
+      expect(response.body.message).toBe('Successfully logged out')
+    })
   }
 
   amPreparingDatabase (seed = true) {
@@ -49,18 +58,6 @@ class LaracastsForum extends Helper {
       if (response.error) {
         throw new Error('Docker not ready')
       }
-    })
-  }
-
-  createThread (values = {}) {
-    let rest = this.helpers['REST']
-    let defaults = {
-      title: 'Test Thread',
-      body: 'This is a test thread.'
-    }
-    return rest.sendPostRequest('/thread', {
-      title: values.title || defaults.title,
-      body: values.body || defaults.body
     })
   }
 

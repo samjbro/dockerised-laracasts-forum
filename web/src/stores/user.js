@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { each } from 'lodash'
+import { http } from '@/services'
 import stub from '@/stubs/user'
 export const userStore = {
   stub,
@@ -25,5 +26,14 @@ export const userStore = {
   },
   get all () {
     return this.state.users
+  },
+
+  login () {
+    return new Promise((resolve, reject) => {
+      http.post('me', { email: 'test@comms-express.com', password: 'secret' }, ({ data }) => {
+        http.init()
+        resolve(data)
+      }, error => reject(error))
+    })
   }
 }

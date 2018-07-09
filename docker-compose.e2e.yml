@@ -1,7 +1,10 @@
 version: '3'
 services:
   server:
-    image: cs-server:latest
+    build:
+      context: ./server
+      dockerfile: docker/Dockerfile.dev
+    image: cs-server
     ports:
     - '${SERVER_PORT}:80'
     networks:

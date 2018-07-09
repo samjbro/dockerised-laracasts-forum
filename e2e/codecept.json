@@ -7,10 +7,10 @@
       "restart": false
     },
     "REST": {
-      "endpoint": "http://server:80/api/api"
+      "endpoint": "http://server:80/api"
     },
     "ApiDataFactory": {
-      "endpoint": "http://server:80/api/api",
+      "endpoint": "http://server:80/api",
       "cleanup": true,
       "factories": {
         "thread": {
@@ -29,7 +29,7 @@
   },
   "include": {},
   "mocha": {},
-  "bootstrap": false,
+  "bootstrap": "./tests/bootstrap.js",
   "teardown": null,
   "hooks": [],
   "gherkin": {},

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { each, unionBy } from 'lodash'
+import { http } from '@/services'
 import stub from '@/stubs/reply'
 import { userStore, threadStore } from '@/stores'
 
@@ -36,5 +37,15 @@ export const replyStore = {
 
   byId (id) {
     return this.cache[id]
+  },
+
+  store (thread, data) {
+    return new Promise((resolve, reject) => {
+      http.post(`threads/${thread.id}/replies`, data, ({ data }) => {
+        console.log('stored reply')
+        this.setupReply(data)
+        resolve(data)
+      }, error => reject(error))
+    })
   }
 }

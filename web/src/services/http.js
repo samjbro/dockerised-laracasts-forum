@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { ls } from '@/services'
 
 export const http = {
   request: (method, url, data, successCb = null, errorCb = null) => {
@@ -14,8 +15,16 @@ export const http = {
     axios.defaults.baseURL = 'api'
 
     axios.interceptors.request.use(config => {
-      config.headers.Authorization = `Bearer ${'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL1wvYXBpXC9sb2dpbiIsImlhdCI6MTUzMDcyMTQ1MCwiZXhwIjoxNTMwNzI1MDUwLCJuYmYiOjE1MzA3MjE0NTAsImp0aSI6IlRQNUR1ekw0S1g5TU41T3UiLCJzdWIiOjU1MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9._o8y3k1jP8jUBa2wzJALWR_kvv-xHCBPcWKqBW-SK2o'}`
+      config.headers.Authorization = `Bearer ${ls.get('jwt-token')}`
       return config
+    })
+
+    axios.interceptors.response.use(response => {
+      const token = response.headers['Authorization'] || response.data['access_token']
+      token && ls.set('jwt-token', token)
+      return response
+    }, error => {
+      return Promise.reject(error)
     })
   }
 }

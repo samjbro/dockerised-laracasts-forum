@@ -69,6 +69,11 @@ if [ $# -gt 0 ]; then
       $COMPOSE up -d
       $COMPOSE run --rm e2e yarn test "$@"
       $COMPOSE down
+    elif [ "$1" == "art" ]; then
+      shift 1
+      $COMPOSE exec api php artisan "$@"
+    elif [ "$1" == "yarn" ]; then
+      $COMPOSE run --rm e2e "$@"
     elif [ "$1" == "test:debug" ]; then
       shift 1
       $COMPOSE up -d

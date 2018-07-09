@@ -23,7 +23,8 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     Route::resource('threads/{thread}/replies', 'ReplyController');
 });
 
-Route::post('login', 'AuthController@login');
+Route::post('me', 'AuthController@login');
+Route::delete('me', 'AuthController@logout');
 
 Route::get('data', 'DataController@index');
 
