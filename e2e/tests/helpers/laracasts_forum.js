@@ -4,6 +4,16 @@ const expect = require('expect')
 
 class LaracastsForum extends Helper {
 
+  constructor(config) {
+    super(config)
+    this.expect = expect
+  }
+  // expect() {
+  //   return require('expect')(...arguments)
+  // }
+  // expect(thing) {
+  //   return expect(thing)
+  // }
 
   _before() {
     const recorder = require('codeceptjs').recorder

@@ -13,6 +13,7 @@
 /api/.env
 
 e2e/node_modules
+e2e/output/
 
 web/node_modules
 
